@@ -1,7 +1,7 @@
 #!name=模块整合
 #!desc=由GithubAction自动更新
 #!author=fantasyxby[https://github.com/fantasyxby]
-#!date=2024-11-05 09:55:08
+#!date=2024-11-05 20:53:49
 
 [General]
 
@@ -380,10 +380,10 @@ DOMAIN-SUFFIX,v.smtcdns.com,REJECT,extended-matching,pre-matching
 ^https:\/\/www\.zhihu\.com\/api\/v4/(?:answers|questions)\/\d+/related-readings data-type=text data="{}" status-code=200
 ^https:\/\/www\.zhihu\.com\/commercial_api\/banners_v3\/mobile_banner data-type=text data="{}" status-code=200
 ^https:\/\/zhuanlan\.zhihu\.com\/api\/articles\/\d+\/recommendation data-type=text data="{}" status-code=200
-^https:\/\/edith\.xiaohongshu\.com\/api\/sns\/v\d+\/surprisebox\/(get_style|open|submit_action) data-type=text data="{}" status-code=200
+^https:\/\/edith\.xiaohongshu\.com\/api\/sns\/v1\/surprisebox\/(?:get_style|open|submit_action) data-type=text data="{}" status-code=200
 ^https:\/\/www\.xiaohongshu\.com\/api\/marketing\/box\/trigger\? data-type=text data="{}" status-code=200
-^https:\/\/edith\.xiaohongshu\.com\/api\/sns\/v\d+\/note\/guide\? data-type=text data="{}" status-code=200
-^https:\/\/www\.xiaohongshu\.com\/api\/sns\/v\d+\/(ads\/resource|hey\/\w+\/hey_gallery) data-type=text data="{}" status-code=200
+^https:\/\/edith\.xiaohongshu\.com\/api\/sns\/(?:v2\/guide\/user_banner|v3\/note\/guide) data-type=text data="{}" status-code=200
+^https:\/\/www\.xiaohongshu\.com\/api\/sns\/(?:v1\/ads\/resource|v2\/hey\/\w+\/hey_gallery) data-type=text data="{}" status-code=200
 ^https:\/\/haojia\.m\.smzdm\.com\/detail_modul\/(other_modul|wiki_related_modul)|^https:\/\/s3\.zdmimg\.com\/third\/index|^https:\/\/app-api\.smzdm\.com\/util\/loading data-type=text data="{}" status-code=200
 ^https:\/\/cn-acs\.m\.cainiao\.com\/gw\/mtop\.cainiao\.app\.home\.tabbar\.marketing\.get\.cn data-type=text data="{}" status-code=200
 ^https:\/\/cn-acs\.m\.cainiao\.com\/gw\/mtop\.cainiao\.adkeyword\.get\.cn data-type=text data="{}" status-code=200
@@ -493,15 +493,16 @@ body_rewrite_21 = type=http-response, pattern=^https:\/\/edith\.xiaohongshu\.com
 body_rewrite_22 = type=http-response, pattern=^https:\/\/edith\.xiaohongshu\.com\/api\/sns\/v1\/search\/hot_list$, script-path=https://raw.githubusercontent.com/Script-Hub-Org/Script-Hub/main/scripts/body-rewrite.js, requires-body=true, max-size=-1, timeout=30, argument=%5B%5B%22json-replace%22%2C%5B%5B%22data.items%22%2C%5B%5D%5D%5D%5D%5D
 body_rewrite_23 = type=http-response, pattern=^https:\/\/edith\.xiaohongshu\.com\/api\/sns\/v4\/search\/hint, script-path=https://raw.githubusercontent.com/Script-Hub-Org/Script-Hub/main/scripts/body-rewrite.js, requires-body=true, max-size=-1, timeout=30, argument=%5B%5B%22json-replace%22%2C%5B%5B%22data.hint_words%22%2C%5B%5D%5D%5D%5D%5D
 body_rewrite_24 = type=http-response, pattern=^https:\/\/edith\.xiaohongshu\.com\/api\/sns\/v4\/search\/trending\?, script-path=https://raw.githubusercontent.com/Script-Hub-Org/Script-Hub/main/scripts/body-rewrite.js, requires-body=true, max-size=-1, timeout=30, argument=%5B%5B%22json-replace%22%2C%5B%5B%22data.queries%22%2C%5B%5D%5D%2C%5B%22data.hint_word%22%2C%7B%7D%5D%5D%5D%5D
-移除详情页小部件 = type=http-response, pattern=^https:\/\/edith\.xiaohongshu\.com\/api\/sns\/v\d+\/(note\/widgets|user\/followings\/followfeed), script-path=https://kelee.one/Resource/Script/RedPaper/RedPaper_remove_ads.js, requires-body=true
-移除搜索页广告 = type=http-response, pattern=^https:\/\/edith\.xiaohongshu\.com\/api\/sns\/v\d+\/search\/notes\?, script-path=https://kelee.one/Resource/Script/RedPaper/RedPaper_remove_ads.js, requires-body=true
-移除开屏广告 = type=http-response, pattern=^https:\/\/edith\.xiaohongshu\.com\/api\/sns\/v\d+\/system_service\/config\?, script-path=https://kelee.one/Resource/Script/RedPaper/RedPaper_remove_ads.js, requires-body=true
-移除开屏广告 = type=http-response, pattern=^https:\/\/edith\.xiaohongshu\.com\/api\/sns\/v\d+\/system_service\/splash_config, script-path=https://kelee.one/Resource/Script/RedPaper/RedPaper_remove_ads.js, requires-body=true
-移除信息流广告 = type=http-response, pattern=^https:\/\/edith\.xiaohongshu\.com\/api\/sns\/v\d+\/followfeed\?, script-path=https://kelee.one/Resource/Script/RedPaper/RedPaper_remove_ads.js, requires-body=true
-移除详情页感兴趣的人 = type=http-response, pattern=https:\/\/edith\.xiaohongshu\.com\/api\/sns\/v\d+\/recommend\/user\/follow_recommend\?, script-path=https://kelee.one/Resource/Script/RedPaper/RedPaper_remove_ads.js, requires-body=true
-移除信息流广告 = type=http-response, pattern=^https:\/\/edith\.xiaohongshu\.com\/api\/sns\/v\d+\/homefeed\?, script-path=https://kelee.one/Resource/Script/RedPaper/RedPaper_remove_ads.js, requires-body=true
-移除图片和视频水印 = type=http-response, pattern=^https:\/\/edith\.xiaohongshu\.com\/api\/sns\/v\d+\/(note\/feed|note\/videofeed)\?, script-path=https://kelee.one/Resource/Script/RedPaper/RedPaper_remove_ads.js, requires-body=true
-移除图片和实况照片水印 = type=http-response, pattern=https:\/\/edith\.xiaohongshu\.com\/api\/sns\/v\d+\/note\/(imagefeed|live_photo\/save), script-path=https://kelee.one/Resource/Script/RedPaper/RedPaper_remove_ads.js, requires-body=true
+移除图片和实况照片水印 = type=http-response, pattern=^https:\/\/edith\.xiaohongshu\.com\/api\/sns\/v1\/note\/(?:imagefeed|live_photo\/save), script-path=https://kelee.one/Resource/Script/RedPaper/RedPaper_remove_ads.js, requires-body=true
+移除开屏广告 config = type=http-response, pattern=^https:\/\/edith\.xiaohongshu\.com\/api\/sns\/v1\/system_service\/config\?, script-path=https://kelee.one/Resource/Script/RedPaper/RedPaper_remove_ads.js, requires-body=true
+移除开屏广告 splash_config = type=http-response, pattern=^https:\/\/edith\.xiaohongshu\.com\/api\/sns\/v2\/system_service\/splash_config, script-path=https://kelee.one/Resource/Script/RedPaper/RedPaper_remove_ads.js, requires-body=true
+移除详情页小部件、关注页感兴趣的人 = type=http-response, pattern=^https:\/\/edith\.xiaohongshu\.com\/api\/sns\/v2\/(?:note\/widgets|user\/followings\/followfeed), script-path=https://kelee.one/Resource/Script/RedPaper/RedPaper_remove_ads.js, requires-body=true
+移除信息流广告 = type=http-response, pattern=^https:\/\/edith\.xiaohongshu\.com\/api\/sns\/v4\/followfeed\?, script-path=https://kelee.one/Resource/Script/RedPaper/RedPaper_remove_ads.js, requires-body=true
+移除详情页感兴趣的人 = type=http-response, pattern=^https:\/\/edith\.xiaohongshu\.com\/api\/sns\/v5\/recommend\/user\/follow_recommend\?, script-path=https://kelee.one/Resource/Script/RedPaper/RedPaper_remove_ads.js, requires-body=true
+移除信息流广告 = type=http-response, pattern=^https:\/\/edith\.xiaohongshu\.com\/api\/sns\/v6\/homefeed\?, script-path=https://kelee.one/Resource/Script/RedPaper/RedPaper_remove_ads.js, requires-body=true
+移除搜索页广告 = type=http-response, pattern=^https:\/\/edith\.xiaohongshu\.com\/api\/sns\/v10\/search\/notes\?, script-path=https://kelee.one/Resource/Script/RedPaper/RedPaper_remove_ads.js, requires-body=true
+移除图片和视频水印 = type=http-response, pattern=^https:\/\/edith\.xiaohongshu\.com\/api\/sns\/(?:v2\/note\/feed|v3\/note\/videofeed), script-path=https://kelee.one/Resource/Script/RedPaper/RedPaper_remove_ads.js, requires-body=true
+移除视频水印 = type=http-response, pattern=^https:\/\/(?:edith|www)\.xiaohongshu\.com\/api\/sns\/(?:v4\/note\/videofeed|v10\/note\/video\/save), script-path=https://kelee.one/Resource/Script/RedPaper/RedPaper_remove_ads.js, requires-body=true
 移除广告 = type=http-response, pattern=^https:\/\/app-api\.smzdm\.com\/util\/loading, script-path=https://kelee.one/Resource/Script/smzdm/smzdm_remove_ads.js, requires-body=true
 移除广告 = type=http-response, pattern=^https:\/\/haojia-api\.smzdm\.com\/home\/list, script-path=https://kelee.one/Resource/Script/smzdm/smzdm_remove_ads.js, requires-body=true
 移除广告 = type=http-response, pattern=^https:\/\/app-api\.smzdm\.com\/util\/update, script-path=https://kelee.one/Resource/Script/smzdm/smzdm_remove_ads.js, requires-body=true
@@ -569,4 +570,4 @@ body_rewrite_34 = type=http-response, pattern=^https:\/\/m5-zb\.amap\.com\/ws\/s
 
 [MITM]
 
-hostname = %APPEND% video-dsp.pddpic.com, t-dsp.pinduoduo.com, images.pinduoduo.com, app.bilibili.com, api.bilibili.com, api.live.bilibili.com, grpc.biliapi.net, www.bilibili.com, m.bilibili.com, live.bilibili.com, *api.weibo.cn, sdkapp.uve.weibo.com, *.zhihu.com, edith.xiaohongshu.com, www.xiaohongshu.com, haojia-api.smzdm.com, homepage-api.smzdm.com, app-api.smzdm.com, user-api.smzdm.com, article-api.smzdm.com, qianbao.smzdm.com, s3.zdmimg.com, cn-acs.m.cainiao.com, guide-acs.m.taobao.com, acs.m.goofish.com, g-acs.m.goofish.com, api.coolapk.com, tiebac.baidu.com, tieba.baidu.com, acs.m.taobao.com, heic.alicdn.com, guide-acs.m.taobao.com, poplayer.template.alibaba.com, api.m.jd.com, api.pinduoduo.com, api.yangkeduo.com, *.googlevideo.com, youtubei.googleapis.com, rtbapi.douyucdn.cn, apiv2.douyucdn.cn, venus.douyucdn.cn, napi.ithome.com, api.zuihuimai.com, dat.ruanmei.com, games.mobileapi.hupu.com, fairy.mobileapi.hupu.com, bbs.mobileapi.hupu.com, goblin.hupu.com, api.xiaoheihe.cn, mp.weixin.qq.com, m5.amap.com, m5-zb.amap.com, oss.amap.com, sns.amap.com
+hostname = %APPEND% video-dsp.pddpic.com, t-dsp.pinduoduo.com, images.pinduoduo.com, app.bilibili.com, api.bilibili.com, api.live.bilibili.com, grpc.biliapi.net, www.bilibili.com, m.bilibili.com, live.bilibili.com, *api.weibo.cn, sdkapp.uve.weibo.com, *.zhihu.com, edith.xiaohongshu.com, rec.xiaohongshu.com, www.xiaohongshu.com, haojia-api.smzdm.com, homepage-api.smzdm.com, app-api.smzdm.com, user-api.smzdm.com, article-api.smzdm.com, qianbao.smzdm.com, s3.zdmimg.com, cn-acs.m.cainiao.com, guide-acs.m.taobao.com, acs.m.goofish.com, g-acs.m.goofish.com, api.coolapk.com, tiebac.baidu.com, tieba.baidu.com, acs.m.taobao.com, heic.alicdn.com, guide-acs.m.taobao.com, poplayer.template.alibaba.com, api.m.jd.com, api.pinduoduo.com, api.yangkeduo.com, *.googlevideo.com, youtubei.googleapis.com, rtbapi.douyucdn.cn, apiv2.douyucdn.cn, venus.douyucdn.cn, napi.ithome.com, api.zuihuimai.com, dat.ruanmei.com, games.mobileapi.hupu.com, fairy.mobileapi.hupu.com, bbs.mobileapi.hupu.com, goblin.hupu.com, api.xiaoheihe.cn, mp.weixin.qq.com, m5.amap.com, m5-zb.amap.com, oss.amap.com, sns.amap.com
