@@ -1,7 +1,7 @@
 #!name=模块整合
 #!desc=由GithubAction自动更新
 #!author=fantasyxby[https://github.com/fantasyxby]
-#!date=2024-11-06 09:54:40
+#!date=2024-11-06 20:55:06
 
 [General]
 
@@ -332,6 +332,8 @@ DOMAIN-SUFFIX,v.smtcdns.com,REJECT,extended-matching,pre-matching
 
 [URL Rewrite]
 
+^https?:\/\/(www.)?(g|google)\.cn https://www.google.com 302
+^https?:\/\/(ditu|maps).google\.cn https://maps.google.com 302
 ^https:\/\/video-dsp\.pddpic\.com\/market-dsp-video\/ - reject
 ^https:\/\/t-dsp\.pinduoduo\.com\/dspcb\/i\/mrk_union - reject
 ^https:\/\/images\.pinduoduo\.com\/mrk\/ - reject
@@ -502,7 +504,7 @@ body_rewrite_24 = type=http-response, pattern=^https:\/\/edith\.xiaohongshu\.com
 移除信息流广告 = type=http-response, pattern=^https:\/\/edith\.xiaohongshu\.com\/api\/sns\/v6\/homefeed\?, script-path=https://kelee.one/Resource/Script/RedPaper/RedPaper_remove_ads.js, requires-body=true
 移除搜索页广告 = type=http-response, pattern=^https:\/\/edith\.xiaohongshu\.com\/api\/sns\/v10\/search\/notes\?, script-path=https://kelee.one/Resource/Script/RedPaper/RedPaper_remove_ads.js, requires-body=true
 移除图片和视频水印 = type=http-response, pattern=^https:\/\/edith\.xiaohongshu\.com\/api\/sns\/(?:v2\/note\/feed|v3\/note\/videofeed), script-path=https://kelee.one/Resource/Script/RedPaper/RedPaper_remove_ads.js, requires-body=true
-移除视频水印 = type=http-response, pattern=^https:\/\/(?:edith|www)\.xiaohongshu\.com\/api\/sns\/(?:v4\/note\/videofeed|v10\/note\/video\/save), script-path=https://kelee.one/Resource/Script/RedPaper/RedPaper_remove_ads.js, requires-body=true
+移除视频水印 = type=http-response, pattern=^https:\/\/(?:edith|rec|www)\.xiaohongshu\.com\/api\/sns\/(?:v4\/note\/videofeed|v10\/note\/video\/save), script-path=https://kelee.one/Resource/Script/RedPaper/RedPaper_remove_ads.js, requires-body=true
 移除广告 = type=http-response, pattern=^https:\/\/app-api\.smzdm\.com\/util\/loading, script-path=https://kelee.one/Resource/Script/smzdm/smzdm_remove_ads.js, requires-body=true
 移除广告 = type=http-response, pattern=^https:\/\/haojia-api\.smzdm\.com\/home\/list, script-path=https://kelee.one/Resource/Script/smzdm/smzdm_remove_ads.js, requires-body=true
 移除广告 = type=http-response, pattern=^https:\/\/app-api\.smzdm\.com\/util\/update, script-path=https://kelee.one/Resource/Script/smzdm/smzdm_remove_ads.js, requires-body=true
@@ -570,4 +572,4 @@ body_rewrite_34 = type=http-response, pattern=^https:\/\/m5-zb\.amap\.com\/ws\/s
 
 [MITM]
 
-hostname = %APPEND% video-dsp.pddpic.com, t-dsp.pinduoduo.com, images.pinduoduo.com, app.bilibili.com, api.bilibili.com, api.live.bilibili.com, grpc.biliapi.net, www.bilibili.com, m.bilibili.com, live.bilibili.com, *api.weibo.cn, sdkapp.uve.weibo.com, *.zhihu.com, edith.xiaohongshu.com, rec.xiaohongshu.com, www.xiaohongshu.com, haojia-api.smzdm.com, homepage-api.smzdm.com, app-api.smzdm.com, user-api.smzdm.com, article-api.smzdm.com, qianbao.smzdm.com, s3.zdmimg.com, cn-acs.m.cainiao.com, guide-acs.m.taobao.com, acs.m.goofish.com, g-acs.m.goofish.com, api.coolapk.com, tiebac.baidu.com, tieba.baidu.com, acs.m.taobao.com, heic.alicdn.com, guide-acs.m.taobao.com, poplayer.template.alibaba.com, api.m.jd.com, api.pinduoduo.com, api.yangkeduo.com, *.googlevideo.com, youtubei.googleapis.com, rtbapi.douyucdn.cn, apiv2.douyucdn.cn, venus.douyucdn.cn, napi.ithome.com, api.zuihuimai.com, dat.ruanmei.com, games.mobileapi.hupu.com, fairy.mobileapi.hupu.com, bbs.mobileapi.hupu.com, goblin.hupu.com, api.xiaoheihe.cn, mp.weixin.qq.com, m5.amap.com, m5-zb.amap.com, oss.amap.com, sns.amap.com
+hostname = %APPEND% www.google.cn, video-dsp.pddpic.com, t-dsp.pinduoduo.com, images.pinduoduo.com, app.bilibili.com, api.bilibili.com, api.live.bilibili.com, grpc.biliapi.net, www.bilibili.com, m.bilibili.com, live.bilibili.com, *api.weibo.cn, sdkapp.uve.weibo.com, *.zhihu.com, edith.xiaohongshu.com, rec.xiaohongshu.com, www.xiaohongshu.com, haojia-api.smzdm.com, homepage-api.smzdm.com, app-api.smzdm.com, user-api.smzdm.com, article-api.smzdm.com, qianbao.smzdm.com, s3.zdmimg.com, cn-acs.m.cainiao.com, guide-acs.m.taobao.com, acs.m.goofish.com, g-acs.m.goofish.com, api.coolapk.com, tiebac.baidu.com, tieba.baidu.com, acs.m.taobao.com, heic.alicdn.com, guide-acs.m.taobao.com, poplayer.template.alibaba.com, api.m.jd.com, api.pinduoduo.com, api.yangkeduo.com, *.googlevideo.com, youtubei.googleapis.com, rtbapi.douyucdn.cn, apiv2.douyucdn.cn, venus.douyucdn.cn, napi.ithome.com, api.zuihuimai.com, dat.ruanmei.com, games.mobileapi.hupu.com, fairy.mobileapi.hupu.com, bbs.mobileapi.hupu.com, goblin.hupu.com, api.xiaoheihe.cn, mp.weixin.qq.com, m5.amap.com, m5-zb.amap.com, oss.amap.com, sns.amap.com
