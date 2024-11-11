@@ -1,7 +1,7 @@
 #!name=模块整合
 #!desc=由GithubAction自动更新
 #!author=fantasyxby[https://github.com/fantasyxby]
-#!date=2024-11-11 09:57:27
+#!date=2024-11-11 20:55:16
 
 [General]
 
@@ -115,6 +115,7 @@ DOMAIN,user.jpush.cn,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,jiguang.cn,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,jpush.cn,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,jpush.io,REJECT,extended-matching,pre-matching
+DOMAIN,afd.baidu.com,REJECT,extended-matching,pre-matching
 DOMAIN,als.baidu.com,REJECT,extended-matching,pre-matching
 DOMAIN,bgg.baidu.com,REJECT,extended-matching,pre-matching
 DOMAIN,cpro.baidustatic.com,REJECT,extended-matching,pre-matching
