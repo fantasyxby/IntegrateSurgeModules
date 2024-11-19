@@ -19,11 +19,12 @@ jobs:
 
     - name: Install dependencies
       run: |
-        pip install requests
+        pip install requests GitPython
 
     - name: Run Python script
       run: |
         python integrate.py
+        python convert.py
 
     - name: Commit and push changes
       uses: EndBug/add-and-commit@v9

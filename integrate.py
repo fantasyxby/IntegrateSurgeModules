@@ -4,6 +4,18 @@ import re
 
 import requests
 
+def main():
+    listPath = os.path.join(os.path.dirname(os.path.abspath(__file__)), "sgmodule.list")
+
+    try:
+        with open(listPath, 'r', encoding='utf-8') as file:
+            urlList = [line.strip() for line in file if line.strip() and not line.startswith("#")]
+    except IOError as e:
+        print(f"Error reading the input file: {e}")
+        exit(1)
+
+    process(urlList)
+
 
 def getSection(resource, section):
     pattern = rf"\[{section}\](.*?)(?:\[(General|Rule|URL Rewrite|Map Local|Script|MITM)\]|$)"
@@ -133,13 +145,4 @@ def process(urlList):
 
 
 if __name__ == "__main__":
-    listPath = os.path.join(os.path.dirname(os.path.abspath(__file__)), "sgmodule.list")
-
-    try:
-        with open(listPath, 'r', encoding='utf-8') as file:
-            urlList = [line.strip() for line in file if line.strip() and not line.startswith("#")]
-    except IOError as e:
-        print(f"Error reading the input file: {e}")
-        exit(1)
-
-    process(urlList)
+    main()
