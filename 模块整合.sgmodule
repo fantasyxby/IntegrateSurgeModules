@@ -1,7 +1,7 @@
 #!name=模块整合
 #!desc=由GithubAction自动更新
 #!author=fantasyxby[https://github.com/fantasyxby]
-#!date=2024-12-03 20:59:39
+#!date=2024-12-04 10:12:05
 
 [General]
 
@@ -127,6 +127,7 @@ DOMAIN,mobads.baidu.com,REJECT,extended-matching,pre-matching
 DOMAIN,nadvideo2.baidu.com,REJECT,extended-matching,pre-matching
 DOMAIN,wn.pos.baidu.com,REJECT,extended-matching,pre-matching
 DOMAIN,miniapp-ad.cdn.bcebos.com,REJECT,extended-matching,pre-matching
+DOMAIN,mobads-pre-config.cdn.bcebos.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,union.baidu.cn,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,union.baidu.com,REJECT,extended-matching,pre-matching
 DOMAIN,adsmind.gdtimg.com,REJECT,extended-matching,pre-matching
@@ -138,6 +139,7 @@ DOMAIN,info6.video.qq.com,REJECT,extended-matching,pre-matching
 DOMAIN,ios.bugly.qq.com,REJECT,extended-matching,pre-matching
 DOMAIN,pro.bugly.qq.com,REJECT,extended-matching,pre-matching
 DOMAIN,ios.video.mpush.qq.com,REJECT,extended-matching,pre-matching
+DOMAIN,us.l.qq.com,REJECT,extended-matching,pre-matching
 DOMAIN,mi.gdt.qq.com,REJECT,extended-matching,pre-matching
 DOMAIN,otheve.beacon.qq.com,REJECT,extended-matching,pre-matching
 DOMAIN,pgdt.gtimg.cn,REJECT,extended-matching,pre-matching
@@ -257,6 +259,7 @@ DOMAIN,adx-sg-req.bridgeoos.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,bridgeoos.com,REJECT,extended-matching,pre-matching
 DOMAIN,ad-evods.tianya.tv,REJECT,extended-matching,pre-matching
 DOMAIN,adx.tuia.cn,REJECT,extended-matching,pre-matching
+DOMAIN-SUFFIX,66mobi.com,REJECT,extended-matching,pre-matching
 URL-REGEX,"^http:\/\/upos-sz-static\.bilivideo\.com\/ssaxcode\/\w{2}\/\w{2}\/\w{32}-1-SPLASH",REJECT-TINYGIF,extended-matching
 URL-REGEX,"^http:\/\/[\d\.]+:8000\/v1\/resource\/\w{32}-1-SPLASH",REJECT-TINYGIF,extended-matching
 DOMAIN,appcloud.zhihu.com,REJECT,extended-matching,pre-matching
