@@ -1,7 +1,7 @@
 #!name=模块整合
 #!desc=由GithubAction自动更新
 #!author=fantasyxby[https://github.com/fantasyxby]
-#!date=2025-03-04 20:56:57
+#!date=2025-03-05 10:03:03
 
 [General]
 
@@ -362,8 +362,9 @@ DOMAIN-SUFFIX,v.smtcdns.com,REJECT,extended-matching,pre-matching
 ^https:\/\/app\.bilibili\.com\/x\/resource\/ip data-type=text data="{}" status-code=200
 ^https:\/\/api\.bilibili\.com\/x\/web-interface\/zone\?jsonp data-type=text data="{}" status-code=200
 ^https:\/\/app\.bilibili\.com\/x\/resource\/top\/activity\? data-type=text data="{ "code": -404, "message": "啥都木有", "ttl": 1, "data": null }" status-code=200 header="Content-Type:text/json"
-^https?:\/\/api\.weibo\.cn\/\d\/(cardlist\?v_f=\d|ad\/weibointl\?) data-type=text data="{}" status-code=200
-^https?:\/\/weibointl\.api\.weibo\.cn\/portal\.php\?a=hot_search_users data-type=text data="{}" status-code=200
+^https?:\/\/api\.weibo\.cn\/2\/ad\/weibointl\? data-type=text data="{}" status-code=200
+^https?:\/\/weibointl\.api\.weibo\.cn\/portal\.php\?a=get_searching_info& data-type=text data="{"retcode":0,"info":"","data":{"expiration_time":"86400","cards":[{"tip":"搜索微博","word":""}]}}" header="Content-Type:text/plain"
+^https?:\/\/weibointl\.api\.weibo\.cn\/portal\.php\?ct=feed&a=search_topic& data-type=text data="{"retcode":0,"info":"","data":[],"ext":{}}" header="Content-Type:text/plain"
 ^https:\/\/api\.zhihu\.com\/commercial_api\/ data-type=text data="{}" status-code=200
 ^https:\/\/api\.zhihu\.com\/content-distribution-core\/bubble\/common\/settings data-type=text data="{}" status-code=200
 ^https:\/\/api\.zhihu\.com\/(?:moments\/lastread|drama\/hot-drama-list) data-type=text data="{}" status-code=200
@@ -480,9 +481,6 @@ body_rewrite_27 = type=http-response, pattern=^https:\/\/app\.bilibili\.com\/x\/
 移除观影页广告 = type=http-response, pattern=^https:\/\/api\.bilibili\.com\/pgc\/page\/(?:bangumi|cinema\/tab), script-path=https://kelee.one/Resource/Script/Bilibili/Bilibili_remove_ads.js, requires-body=true
 移除直播间广告 = type=http-response, pattern=^https:\/\/api\.live\.bilibili\.com\/xlive\/app-room\/v1\/index\/getInfoByRoom\?, script-path=https://kelee.one/Resource/Script/Bilibili/Bilibili_remove_ads.js, requires-body=true
 精简我的页面 = type=http-response, pattern=^https:\/\/app\.bilibili\.com\/x\/v2\/account\/(?:mine|myinfo), script-path=https://kelee.one/Resource/Script/Bilibili/Bilibili_remove_ads.js, requires-body=true
-微博轻享版去广告 = type=http-response, pattern=^https?:\/\/weibointl\.api\.weibo\.cn\/portal\.php\?(ct=(feed&a=trends|user&a=get_searching_info)|a=(get_coopen_ads|user_center|search_topic|open_app&auth|icon_center)), script-path=https://kelee.one/Resource/Script/Weibo_intl/Weibo_intl_remove_ads.js, requires-body=true
-微博轻享版去广告 = type=http-response, pattern=^https?:\/\/api\.weibo\.cn\/\d\/statuses\/.*timeline, script-path=https://kelee.one/Resource/Script/Weibo_intl/Weibo_intl_remove_ads.js, requires-body=true
-微博轻享版去广告 = type=http-response, pattern=^https?:\/\/sdkapp\.uve\.weibo\.com\/interface\/sdk\/sdkad\.php, script-path=https://kelee.one/Resource/Script/Weibo_intl/Weibo_intl_remove_ads.js, requires-body=true
 body_rewrite_30 = type=http-response, pattern=^https:\/\/api\.zhihu\.com\/bazaar\/vip_tab\/header\?, script-path=https://raw.githubusercontent.com/Script-Hub-Org/Script-Hub/main/scripts/body-rewrite.js, requires-body=true, max-size=-1, timeout=30, argument=%5B%5B%22json-del%22%2C%5B%22activity_banner%22%2C%22activity_window%22%2C%22vip_tip%22%5D%5D%5D
 body_rewrite_38 = type=http-response, pattern=^https:\/\/api\.zhihu\.com\/search\/recommend_query\/v2\?, script-path=https://raw.githubusercontent.com/Script-Hub-Org/Script-Hub/main/scripts/body-rewrite.js, requires-body=true, max-size=-1, timeout=30, argument=%5B%5B%22replace-regex%22%2C%5B%5B%22%5C%22recommend_queries%5C%22%3A%5C%5C%7B.%2B%5C%5C%7D%22%2C%22%5C%22recommend_queries%5C%22%3A%7B%7D%22%5D%5D%5D%5D
 移除回答底部卡片推广 = type=http-response, pattern=^https:\/\/(?:api|page-info)\.zhihu\.com\/(?:answers|articles)\/v2\/\d+, script-path=https://kelee.one/Resource/Script/Zhihu/Zhihu_remove_ads.js, requires-body=true
@@ -530,7 +528,6 @@ body_rewrite_24 = type=http-response, pattern=^https:\/\/edith\.xiaohongshu\.com
 移除首页信息流推广 = type=http-response, pattern=^https:\/\/(g-)?acs\.m\.goofish\.com\/gw\/mtop\.taobao\.idlehome\.home\.nextfresh\/, script-path=https://kelee.one/Resource/Script/FleaMarket/FleaMarket_remove_ads.js, requires-body=true
 移除首页顶部标签推广 = type=http-response, pattern=^https:\/\/(g-)?acs\.m\.goofish\.com\/gw\/mtop\.taobao\.idlehome\.home\.circle\.list\/, script-path=https://kelee.one/Resource/Script/FleaMarket/FleaMarket_remove_ads.js, requires-body=true
 移除搜索结果广告 = type=http-response, pattern=^https:\/\/g-(g-)?acs\.m\.goofish\.com\/gw\/mtop\.taobao\.idlemtopsearch\.search\/, script-path=https://kelee.one/Resource/Script/FleaMarket/FleaMarket_remove_ads.js, requires-body=true
-移除酷安广告 = type=http-response, pattern=^https:\/\/api\.coolapk\.com\/v6\/(?:feed\/detail|feed\/replyList|page\/dataList|main\/dataList|main\/indexV8|main\/init), script-path=https://kelee.one/Resource/Script/CoolApk/CoolApk_remove_ads.js, requires-body=true
 清理首页 = type=http-response, pattern=^https:\/\/tiebac\.baidu\.com\/livefeed\/feed, script-path=https://kelee.one/Resource/Script/Tieba/Tieba_remove_ads.js, requires-body=true
 清理侧拉抽屉 = type=http-response, pattern=^https:\/\/tiebac\.baidu\.com\/c\/f\/sidebar\/home, script-path=https://kelee.one/Resource/Script/Tieba/Tieba_remove_ads.js, requires-body=true
 清理我的页面 = type=http-response, pattern=^https:\/\/tiebac\.baidu\.com\/c\/u\/user\/profile, script-path=https://kelee.one/Resource/Script/Tieba/Tieba_remove_ads.js, requires-body=true
@@ -547,12 +544,11 @@ body_rewrite_35 = type=http-response, pattern=^https:\/\/api\.pinduoduo\.com\/se
 body_rewrite_28 = type=http-response, pattern=^https:\/\/apiv2\.douyucdn\.cn\/japi\/entrance\/roomRes\/nc\/m\/list, script-path=https://raw.githubusercontent.com/Script-Hub-Org/Script-Hub/main/scripts/body-rewrite.js, requires-body=true, max-size=-1, timeout=30, argument=%5B%5B%22json-del%22%2C%5B%22data.pendant_a%22%2C%22data.entrance_d%22%5D%5D%5D
 body_rewrite_30 = type=http-response, pattern=^https:\/\/venus\.douyucdn\.cn\/venus\/config\/static\/update.+keyCodeSet=flow_config, script-path=https://raw.githubusercontent.com/Script-Hub-Org/Script-Hub/main/scripts/body-rewrite.js, requires-body=true, max-size=-1, timeout=30, argument=%5B%5B%22json-replace%22%2C%5B%5B%22greatGodGameSitterSwitch%22%2C0%5D%2C%5B%22followMoreAnchorEntrance%22%2C0%5D%2C%5B%22sdklivebanner%22%2C0%5D%2C%5B%22homeActFloatSwitch%22%2C0%5D%2C%5B%22bringGoodsSwitch%22%2C0%5D%2C%5B%22qqGameSwitch%22%2C0%5D%5D%5D%5D
 移除首页轮播图和视频流广告 = type=http-response, pattern=^https:\/\/apiv2\.douyucdn\.cn\/mgapi\/livenc\/home\/getRecV3, script-path=https://kelee.one/Resource/Script/Douyu/Douyu_remove_ads.js, requires-body=true
-IT之家去广告 = type=http-response, pattern=^https:\/\/napi\.ithome\.com\/api\/(?:news\/index|topmenu\/getfeeds\?|api\/douyin\/GetLiveInfo), script-path=https://kelee.one/Resource/Script/IThome/IThome_remove_ads.js, requires-body=true
+IT之家去广告 = type=http-response, pattern=^https:\/\/napi\.ithome\.com\/api\/(?:news\/index|topmenu\/getfeeds\?|api\/douyin\/GetLiveInfo), script-path=https://kelee.one/Resource/Script/IThome/IThome_remove_ads.js, requires-body=true, argument="[{removeTopSwitch},{removeBannerSwitch}]"
 移除虎扑广告 = type=http-response, pattern=^https:\/\/fairy\.mobileapi\.hupu\.com\/mang\/preview\/banners, script-path=https://kelee.one/Resource/Script/HUPU/HUPU_remove_ads.js, requires-body=true
 移除虎扑广告 = type=http-response, pattern=^https:\/\/bbs\.mobileapi\.hupu\.com\/\d\/\d\.\d\.\d+\/bbsallapi\/lego\/data, script-path=https://kelee.one/Resource/Script/HUPU/HUPU_remove_ads.js, requires-body=true
 移除虎扑广告 = type=http-response, pattern=^https:\/\/games\.mobileapi\.hupu\.com\/\d\/\d\.\d\.\d+\/buffer\/hotList, script-path=https://kelee.one/Resource/Script/HUPU/HUPU_remove_ads.js, requires-body=true
 移除虎扑广告 = type=http-response, pattern=^https:\/\/games\.mobileapi\.hupu\.com\/\d\/\d\.\d\.\d+\/bplapi\/user\/v1\/more, script-path=https://kelee.one/Resource/Script/HUPU/HUPU_remove_ads.js, requires-body=true
-移除热点板块信息流广告 = type=http-response, pattern=^https:\/\/api\.xiaoheihe\.cn\/bbs\/app\/feeds\/news, script-path=https://kelee.one/Resource/Script/XiaoHeiHe/XiaoHeiHe_remove_ads.js, requires-body=true
 body_rewrite_21 = type=http-response, pattern=^https:\/\/m5\.amap\.com\/ws\/shield\/search_business\/process\/marketingOperationStructured\?, script-path=https://raw.githubusercontent.com/Script-Hub-Org/Script-Hub/main/scripts/body-rewrite.js, requires-body=true, max-size=-1, timeout=30, argument=%5B%5B%22json-del%22%2C%5B%22data.commonMaterial%22%2C%22data.tipsOperationLocation%22%2C%22data.resourcePlacement%22%5D%5D%5D
 body_rewrite_22 = type=http-response, pattern=^https:\/\/m5\.amap\.com\/ws\/shield\/search_poi\/homepage\?, script-path=https://raw.githubusercontent.com/Script-Hub-Org/Script-Hub/main/scripts/body-rewrite.js, requires-body=true, max-size=-1, timeout=30, argument=%5B%5B%22json-del%22%2C%5B%22history_tags%22%5D%5D%5D
 body_rewrite_34 = type=http-response, pattern=^https:\/\/m5-zb\.amap\.com\/ws\/sharedtrip\/taxi\/order_detail_car_tips\?, script-path=https://raw.githubusercontent.com/Script-Hub-Org/Script-Hub/main/scripts/body-rewrite.js, requires-body=true, max-size=-1, timeout=30, argument=%5B%5B%22json-del%22%2C%5B%22data.carTips.data.popupInfo%22%5D%5D%5D
@@ -574,4 +570,4 @@ body_rewrite_34 = type=http-response, pattern=^https:\/\/m5-zb\.amap\.com\/ws\/s
 
 [MITM]
 
-hostname = %APPEND% www.google.cn, video-dsp.pddpic.com, t-dsp.pinduoduo.com, images.pinduoduo.com, ap?.bilibili.com, grpc.biliapi.net, www.bilibili.com, m.bilibili.com, *live.bilibili.com, *api.weibo.cn, sdkapp.uve.weibo.com, *.zhihu.com, edith.xiaohongshu.com, rec.xiaohongshu.com, www.xiaohongshu.com, haojia-api.smzdm.com, homepage-api.smzdm.com, app-api.smzdm.com, user-api.smzdm.com, article-api.smzdm.com, qianbao.smzdm.com, s3.zdmimg.com, cn-acs.m.cainiao.com, guide-acs.m.taobao.com, acs.m.goofish.com, g-acs.m.goofish.com, api.coolapk.com, tiebac.baidu.com, tieba.baidu.com, acs.m.taobao.com, heic.alicdn.com, guide-acs.m.taobao.com, poplayer.template.alibaba.com, api.m.jd.com, api.pinduoduo.com, api.yangkeduo.com, rtbapi.douyucdn.cn, apiv2.douyucdn.cn, venus.douyucdn.cn, napi.ithome.com, api.zuihuimai.com, dat.ruanmei.com, games.mobileapi.hupu.com, fairy.mobileapi.hupu.com, bbs.mobileapi.hupu.com, goblin.hupu.com, api.xiaoheihe.cn, mp.weixin.qq.com, m5.amap.com, m5-zb.amap.com, oss.amap.com, sns.amap.com
+hostname = %APPEND% www.google.cn, video-dsp.pddpic.com, t-dsp.pinduoduo.com, images.pinduoduo.com, ap?.bilibili.com, grpc.biliapi.net, www.bilibili.com, m.bilibili.com, *live.bilibili.com, api.weibo.cn, weibointl.api.weibo.cn, *.zhihu.com, edith.xiaohongshu.com, rec.xiaohongshu.com, www.xiaohongshu.com, haojia-api.smzdm.com, homepage-api.smzdm.com, app-api.smzdm.com, user-api.smzdm.com, article-api.smzdm.com, qianbao.smzdm.com, s3.zdmimg.com, cn-acs.m.cainiao.com, guide-acs.m.taobao.com, acs.m.goofish.com, g-acs.m.goofish.com, api.coolapk.com, tiebac.baidu.com, tieba.baidu.com, acs.m.taobao.com, heic.alicdn.com, guide-acs.m.taobao.com, poplayer.template.alibaba.com, api.m.jd.com, api.pinduoduo.com, api.yangkeduo.com, rtbapi.douyucdn.cn, apiv2.douyucdn.cn, venus.douyucdn.cn, napi.ithome.com, api.zuihuimai.com, dat.ruanmei.com, games.mobileapi.hupu.com, fairy.mobileapi.hupu.com, bbs.mobileapi.hupu.com, goblin.hupu.com, api.xiaoheihe.cn, mp.weixin.qq.com, m5.amap.com, m5-zb.amap.com, oss.amap.com, sns.amap.com
